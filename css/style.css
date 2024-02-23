@@ -1,0 +1,17 @@
+* {
+    box-sizing: border=box;
+
+}
+
+body {
+    /* viewport units: vh = height, vw = width vmin = % of smallest(vh or vw); */
+    height: 100vh;
+    margin: 40px;
+    font-family: "Press Start 2P", system-ui;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+
+}
