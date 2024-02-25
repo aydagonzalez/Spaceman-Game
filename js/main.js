@@ -3,6 +3,7 @@ console.log( "ARE YOU THERE AYDA?")
     const WORDS = ['wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
     // -words to randomize with (fisher yates shuffle -- will shuffle array)
     const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',];
+    
 
    const guessLimit = 5 //this will set # of total guess limit
 
@@ -13,24 +14,15 @@ console.log( "ARE YOU THERE AYDA?")
   /*----- state variables -----*/
 let board;
 let board2;
-let guesses;
+let maxWrong = 5
 //   cGuess: 0, // # total correct player guesses count
 //   wGuess: 0, // # total incorrect player guesses count
 let results;
-
-
-let wordCount;
-//  = {} // how many letters left to guess 
-// //tG =  set# // number to total guesses allowed
-
+let wordCount;//  = {} // how many letters left to guess 
 let winner; 
-// = {
-//   playerGuess: 
-// } //starts at null, 
-          // (pG === tG && wordCount > 0) player looses if pG === tG total guesses allowed, but has letters left to identity from the wordCunt
-          //player wins if pG guesses word  (pG wins if wordCount === 0)
-
+let splitWordGenerator;
   /*----- cached elements  -----*/
+  const wordDiv = document.querySelector(".flex-container");
   const columnEls = [...document.querySelectorAll('.column')]
   console.log ('TRIAL:', columnEls)
 //listen for clicks:
@@ -41,12 +33,66 @@ let winner;
     // -spaceman image
     // -when player guesses a letter
     // -when player whats to clear the Game or play again
-let splitWordGenerator;
+
 
   /*----- event listeners -----*/
-  document.querySelector('.start-button')
-  .addEventListener('click', handleStartButton);
+
+//   document.querySelector('.start-button')
+//   .addEventListener('click', handleStartButton);
+
+  // const buttons = document.querySelectorAll('.buttons')
+  // let textarea = buttons.innerText
+
+  // let text = buttons.innerText
+  // console.log(text)
+  // buttons.forEach(btn => {
+  //   btn.addEventListener('click', () => {
+  //     textarea
+  //   })
+  // })
+
+function getKeyboard() {
+  let buttons = 'abcdefghijklmnopqrstuvwxyz'
+  let splitButtons = buttons.split('').map(letter =>
+    `
+    <button id="` + letter + ` onClick="handleGuess('`+ letter + `')">` + letter + `</button> `).join('');
+
+   document.getElementById('keyboard').innerHTML =splitButtons ;
+}
+
+getKeyboard();
+
+functionha
+
+document.getElementById()
+
+//   // const textArea = kButton.addEventListener('click', handlekButton);
   
+//   kButton.forEach(btn => {
+//   btn.addEventListener('click', () => {
+//     textArea.value += btn.innerText
+//   })
+// })
+  // function handlekButton(){
+  //   kButton.innerText = 'a'
+  // }
+  // handlekButton()
+
+
+  // function handleChoice(evt){
+  //   //need a Guard (do nothing unless one of the three buttons were clicked)
+  //     if (evt.target.tagName !== "BUTTON") return;
+  //     // console.log(evt.target.tagName)
+  //     //if player made c hoice
+  //     results.p = evt.target.innerText.toLowerCase();
+  //       //compute random choice for computer
+  //     results.c = getRandomRPS();
+  //     winner = getWinner();
+  //     scores[winner] += 1;
+  //     render();
+  //   }
+
+
 
 //  -Button: event listener for clicking the letters guessed,
 // when players want to start over 
@@ -57,8 +103,9 @@ init();
 
 //   √ will initialize all states, => calls render();
 
-  // random word function getRandomWord()
-  // display the length of the word for the player
+  // √ random word function getRandomWord()
+  // √ display the length of the word for the player
+  // link keyboard to letters
   // Guessed letters are shown
   // display the number of chances remaining
   // keep track of number of wrong guesses
@@ -93,6 +140,10 @@ function init() {
   render();
 }
 
+function renderWord(){
+  const word = splitWordGenerator;
+  wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
+}
 
 
 function handleStartButton(evt){
@@ -119,7 +170,7 @@ function render() {
   renderGuesses();
   renderResults();
   renderSplitWordGenerator();
-
+  renderWord();
 }
 
 
@@ -164,13 +215,6 @@ function columnLoop2() {
   
 
 
-  
-function a () {
-for (let key in board) {
-document.getElementById(`${key}`);
-letterDiv.textContent = `${board[key]}`;
-}
-}
 
 
 
@@ -195,47 +239,4 @@ const REAL= {
 
 };
 
-REAL.init(function(newWordonDiv, board3) {
-  console.log(newWordonDiv);
-  console.log('HEllo CRAZY ' + board3)
-})
 
-REAL.loopWord(word =>
-  console.log('TRIAL',word))
-
-
-
-for (let key in REAL) {
-const letterDiv3 = document.getElementById(`${REAL.board3[0]}`);
-letterDiv3.textContent = `${REAL.words[0]}`;
-
-}
-
-console.log('hello:')
-
-
-
-
-
-
-const keyboardDiv = document.querySelector(".middle-section")
-
-for (let i = 97; i <=122; i++) {
-  const button =document.createElement('button');
-  button.innerText = String.fromCharCode(i);
-  keyboardDiv.appendChild(button)
-  // console.log(String.fromCharCode(i))
-}
-
-
-
-const wordDiv = document.querySelector(".flex-container");
-  const word = splitWordGenerator;
-  wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
-
-
-// }
-  console.log('Hell1:', word)
-  console.log(String.fromCharCode('Hell2:',REAL.board3))
-
-  console.log(String.fromCharCode('Hell2:', ))
