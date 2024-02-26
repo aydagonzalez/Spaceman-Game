@@ -3,8 +3,8 @@
     font-weight: 300;
     display: grid;
     grid-template-columns:250px 250px 250px 250px;
-    grid-row-gap: 5px;
-    grid-column-gap: 5px;
+    /* grid-row-gap: 5px; */ 
+    /* grid-column-gap: 5px; */
     /* grid-template-areas:  */
     justify-content: center;
  }
@@ -12,7 +12,9 @@
  body {
     background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2NjcxMC1pbWFnZS1rd3Z4eGVxcC5qcGc.jpg");
     opacity: 0.8;
+    background-size: cover;
 }
+
 
 .grid-item {
     /* border: 3px solid #333; */
@@ -100,12 +102,12 @@
 
 
 
-#moon {
+/* #moon {
     width: 175px;
     background-color: none;
     border: none;
     opacity: 0.5;
-}
+} */
 
 .footer {
     background-color: #dfdfdf;
@@ -140,7 +142,7 @@
     height: 40px;
     margin: 10px;
     border: 1px solid #b02f2f;
-    background-color: rgb(123, 36, 181);
+    /* background-color: rgb(123, 36, 181); */
     opacity: 0.5;
     /* list-style: none; */
     /* border-top: 3px; */
@@ -170,3 +172,11 @@
 .timer{
     background-color: #dfdfdf;
 }
+/* 
+.you-lose {
+    background-position: 50%;
+    visibility: hidden; 
+    width: 50px
+    ;   
+
+} */
