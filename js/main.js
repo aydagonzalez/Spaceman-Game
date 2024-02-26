@@ -10,6 +10,8 @@ const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'
                                   /*----- state variables -----*/
 let results;
 let winner; 
+let splitWordGenerator;
+// let word = splitWordGenerator; 
                                   /*----- cached elements  -----*/
 
 const wordDiv = document.querySelector(".flex-container");
@@ -38,11 +40,12 @@ function init() {
   getKeyboard();
 
   render()
+  renderWordDiv();
 }
 
 
 function render() {
-  renderWordDiv();
+
   renderWord();
   renderResults()
 }
@@ -65,26 +68,27 @@ function renderSplitWordGenerator() {
 }
 
 
+// function renderWordDiv(){
+//   const word = splitWordGenerator;
+//   console.log (word)
+// word.forEach(lett => {
+//   for (let i = 0; i < word.length; i++) {
+//     const creatingWordDiv = document.createElement('div');
+//     creatingWordDiv.classList.add(i);
+//     creatingWordDiv.innerText = lett;
+//     const columnEls2 = [document.querySelector('.column')];
+//     // columnEls2.appendChild(creatingWordDiv);
 
-
-// function renderWordDiv() {
-//   const word = splitWordGenerator; 
-  // wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
-  // console.log('WORD',word)
+//     // const element = array[i];
+//   }
+// }
+//   )
 // }
 
 
-function renderWordDiv() {
-  const word = splitWordGenerator; // Assuming splitWordGenerator is a function that returns an array of letters
-  word.forEach((letter, index) => {
-    const creatingWordDiv = document.createElement('div');
-    creatingWordDiv.classList.add('word-div'); // Add a meaningful class name here
-    creatingWordDiv.setAttribute('id', index)
-    creatingWordDiv.innerText = letter;
-    const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
-    columnEl.appendChild(creatingWordDiv);
-  });
-}
+
+
+
 
 
 function renderWord(button, letter){
@@ -113,11 +117,44 @@ function renderWord(button, letter){
 
 
 
+// function renderWordDiv() {
+//   const word = splitWordGenerator; 
+//   wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
+//   console.log('WORD',word)
+// }
+
+
+
+function renderWordDiv() {
+  const word = splitWordGenerator;
+  for (const item of word) {
+    const creatingWordDiv = document.createElement('div');
+    creatingWordDiv.classList.add('word-div', 'flex-item', 'item-1'); // Add a meaningful class name here
+    creatingWordDiv.setAttribute('id', word.indexOf(item));
+    const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
+    columnEl.appendChild(creatingWordDiv);
+    console.log(item);
+  }
+}
+
+
+
 function handleClick(button, letter) {
+  const word = splitWordGenerator; 
   if (splitWordGenerator.includes(letter)) {
     button.style.backgroundColor = 'green';
+
     correctGuess()
+
+    if( word === letter) {
+      wordDiv.querySelectorAll('div')[word.indexOf()].innerHTML = letter;
+      wordDiv.innerHTML = word.map((letter) => `<div class="flex-item column">` + word.indexOf() + `</div>`).join("");
+
+    }
+
     console.log (letter)
+
+
   } else {
     button.disabled = true
     button.style.backgroundColor = 'grey';
@@ -130,7 +167,9 @@ function handleClick(button, letter) {
 
   
 function correctGuess() {
+    // const word = splitWordGenerator; 
     results.cG++
+
     // results = renderResults();
     render()
   
