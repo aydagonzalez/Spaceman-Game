@@ -17,6 +17,7 @@ let splitWordGenerator;
 const wordDiv = document.querySelector(".flex-container");
 const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
+const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
 const makeKeyboard = document.querySelector(".middle-section")
 const button =document.createElement('button');
 const playAgainBtn = document.getElementById('play-again-button')
@@ -51,14 +52,26 @@ function handlePlayAgain() {
 }
 
 function handleShuffle() {
+  results ={ 
+    cG: 0, // # total correct player guesses count  
+    wG: 0,// # total incorrect player guesses count}
+     }
+  winner = null;
+  splitWordGenerator = renderSplitWordGenerator()
+  const wordDivs = document.querySelectorAll('.word-div')
+  // console.log('WORD:', wordDivs)
+  wordDivs.forEach(div => div.remove())
+  renderWordDiv()
+
+     /// replace WordDiv
+     //resetKeyboard
+  render();
 
 }
 
 
 function render() {
-  renderWord();
   renderResults()
-
   renderControls()
 }
 
@@ -66,7 +79,6 @@ function render() {
 
 function renderControls() {
   playAgainBtn.style.visibility = winner ? "visible" : "hidden";
-
 }
 
 
@@ -94,18 +106,17 @@ function renderSplitWordGenerator() {
   };
 }
 
-
-
-
-function renderWord(button, letter){
-    // button.style.backgroundColor = 'black';
-  // wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
-  // const word = splitWordGenerator;
-  // if X happened then = >     // wordDiv.innerHTML = word.map((letter) => letter)  
-  // wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
-  // wordDiv.innerHTML = word.map((word) =>  word).join("")
-  // console.log(word)
+function renderWordDiv() {
+  const word = splitWordGenerator;
+  for (const item of word) {
+    const creatingWordDiv = document.createElement('div');
+    creatingWordDiv.classList.add('word-div', 'flex-item', 'item-1'); // Add a meaningful class name here
+    creatingWordDiv.setAttribute('id', item);
+    columnEl.appendChild(creatingWordDiv);
+    console.log(item);
+  }
 }
+
 
   // fronm geeks to geeks
   function getKeyboard() {
@@ -119,20 +130,6 @@ function renderWord(button, letter){
     }
   }
   )
-}
-
-
-
-function renderWordDiv() {
-  const word = splitWordGenerator;
-  for (const item of word) {
-    const creatingWordDiv = document.createElement('div');
-    creatingWordDiv.classList.add('word-div', 'flex-item', 'item-1'); // Add a meaningful class name here
-    creatingWordDiv.setAttribute('id', item);
-    const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
-    columnEl.appendChild(creatingWordDiv);
-    console.log(item);
-  }
 }
 
 
@@ -160,6 +157,7 @@ function handleClick(button, letter) {
   
 function correctGuess() {
     results.cG++
+    button.disabled = true
     render()
 }
 
@@ -175,12 +173,6 @@ function wrongGuess() {
 
 }
 
-
-// function youlose(){
-//   const img = document.getElementById('you-lost');   
-//   img.style.visibility = "visible";
-
-// }
 
 
 function renderResults() {
