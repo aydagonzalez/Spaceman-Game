@@ -19,17 +19,20 @@ const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
 const makeKeyboard = document.querySelector(".middle-section")
 const button =document.createElement('button');
+const playAgainBtn = document.getElementById('play-again-button')
+const shuffleWordsBtn = document.getElementById('shuffle')
 
 // const word = document.querySelector(".middle-section")
 
 
 
                                   /*----- event listeners -----*/
+playAgainBtn.addEventListener('click', handlePlayAgain)
+shuffleWordsBtn.addEventListener('click', handleShuffle)
 
                                  /*----- functions -----*/
                                 
 init();
-
 function init() {
   results ={ 
     cG: 0, // # total correct player guesses count  
@@ -37,19 +40,41 @@ function init() {
      }
 
   winner = null;
-
   splitWordGenerator = renderSplitWordGenerator()
   getKeyboard();
-
-  render()
   renderWordDiv();
+  render()
+}
+
+function handlePlayAgain() {
+  render()
+}
+
+function handleShuffle() {
+
 }
 
 
 function render() {
-
   renderWord();
   renderResults()
+
+  renderControls()
+}
+
+
+
+function renderControls() {
+  playAgainBtn.style.visibility = winner ? "visible" : "hidden";
+
+}
+
+
+function getWinner(button, letter) {
+
+  //need to check for a winner in the broard state
+  //returb null for no winner, retun YES from winner
+  
 }
 
 
@@ -68,27 +93,6 @@ function renderSplitWordGenerator() {
     // console.log('SPLITWORD w;', splitWord)
   };
 }
-
-
-// function renderWordDiv(){
-//   const word = splitWordGenerator;
-//   console.log (word)
-// word.forEach(lett => {
-//   for (let i = 0; i < word.length; i++) {
-//     const creatingWordDiv = document.createElement('div');
-//     creatingWordDiv.classList.add(i);
-//     creatingWordDiv.innerText = lett;
-//     const columnEls2 = [document.querySelector('.column')];
-//     // columnEls2.appendChild(creatingWordDiv);
-
-//     // const element = array[i];
-//   }
-// }
-//   )
-// }
-
-
-
 
 
 
@@ -119,14 +123,6 @@ function renderWord(button, letter){
 
 
 
-// function renderWordDiv() {
-//   const word = splitWordGenerator; 
-//   wordDiv.innerHTML = word.map(() => `<div class="flex-item column"></div>`).join("");
-//   console.log('WORD',word)
-// }
-
-
-
 function renderWordDiv() {
   const word = splitWordGenerator;
   for (const item of word) {
@@ -142,6 +138,7 @@ function renderWordDiv() {
 
 
 function handleClick(button, letter) {
+  winner = getWinner(button, letter) //**************//
   const word = splitWordGenerator; 
   if (splitWordGenerator.includes(letter)) {
    const letterEls= document.querySelectorAll(`#${letter}`)
@@ -162,21 +159,16 @@ function handleClick(button, letter) {
 
   
 function correctGuess() {
-    // const word = splitWordGenerator; 
     results.cG++
-
-    // results = renderResults();
     render()
-  
 }
-
 
 function wrongGuess() {
   results.wG++;
   if (results.wG < guessLimit){
     render()
   } else {
-    console.log ("You'vereached your guesslimit");
+    console.log ("You've reached your guesslimit");
     wordDiv.style.backgroundColor= "black";
     
   } 
@@ -191,11 +183,10 @@ function wrongGuess() {
 // }
 
 
-
 function renderResults() {
   for (let key in results) { 
-    pGuessEl= document.getElementById(`${key}-guess`);
-      pGuessEl.innerHTML = `${results[key]}`;
+    pGuessEl= document.getElementById(`wG-guess`);
+      pGuessEl.innerHTML = `${results.wG}` + ` out of ` + `${guessLimit}`;
 
   }
 }
