@@ -15,9 +15,11 @@ let splitWordGenerator;
                                   /*----- cached elements  -----*/
 
 const wordDiv = document.querySelector(".flex-container");
+const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
 const makeKeyboard = document.querySelector(".middle-section")
 const button =document.createElement('button');
+
 // const word = document.querySelector(".middle-section")
 
 
@@ -130,7 +132,7 @@ function renderWordDiv() {
   for (const item of word) {
     const creatingWordDiv = document.createElement('div');
     creatingWordDiv.classList.add('word-div', 'flex-item', 'item-1'); // Add a meaningful class name here
-    creatingWordDiv.setAttribute('id', word.indexOf(item));
+    creatingWordDiv.setAttribute('id', item);
     const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
     columnEl.appendChild(creatingWordDiv);
     console.log(item);
@@ -142,18 +144,11 @@ function renderWordDiv() {
 function handleClick(button, letter) {
   const word = splitWordGenerator; 
   if (splitWordGenerator.includes(letter)) {
+   const letterEls= document.querySelectorAll(`#${letter}`)
+   console.log(letterEls)
+   letterEls.forEach((letterEl) => letterEl.textContent = letter)
     button.style.backgroundColor = 'green';
-
     correctGuess()
-
-    if( word === letter) {
-      wordDiv.querySelectorAll('div')[word.indexOf()].innerHTML = letter;
-      wordDiv.innerHTML = word.map((letter) => `<div class="flex-item column">` + word.indexOf() + `</div>`).join("");
-
-    }
-
-    console.log (letter)
-
 
   } else {
     button.disabled = true
