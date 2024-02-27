@@ -2,8 +2,8 @@
 
 const AUDIO = new Audio('imgs/win-sound.wav')
                                   /*----- constants -----*/
-const WORDS = ['hi'] 
-const guessLimit = 3 //this will set # of total guess limit
+const WORDS = ['wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
+const guessLimit = 3 
 const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 ];
 
@@ -166,15 +166,16 @@ function handleClick(button, letter) {
 
 
 function getWinner() {
-  const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;
+  const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;    ////find reference
   if (correctGs === splitWordGenerator.length) {
     winner = true;
     console.log('Congratulations! You have won this round!');
 
 
-const mainEl = document.querySelector('main')
+const mainEl = document.querySelector('body')
 const img = document.createElement('img');
 img.src = 'imgs/astronaut.png';
+img.classList.add('astro')
 mainEl.appendChild(img)
 
 
