@@ -1,7 +1,9 @@
-console.log( "ARE YOU THERE AYDA?")
+
+
+const AUDIO = new Audio('imgs/win-sound.wav')
                                   /*----- constants -----*/
-const WORDS = ['wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
-const guessLimit = 5 //this will set # of total guess limit
+const WORDS = ['hi'] 
+const guessLimit = 3 //this will set # of total guess limit
 const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 ];
 
@@ -22,13 +24,15 @@ const makeKeyboard = document.querySelector(".middle-section")
 const button =document.createElement('button');
 const playAgainBtn = document.getElementById('play-again-button')
 const shuffleWordsBtn = document.getElementById('shuffle')
+// const gridContainer = document.querySelectorAll('div')
+
 
 // const word = document.querySelector(".middle-section")
 
 
 
                                   /*----- event listeners -----*/
-playAgainBtn.addEventListener('click', handlePlayAgain)
+playAgainBtn.addEventListener('click', handleShuffle)
 shuffleWordsBtn.addEventListener('click', handleShuffle)
 
                                  /*----- functions -----*/
@@ -36,7 +40,7 @@ shuffleWordsBtn.addEventListener('click', handleShuffle)
 init();
 function init() {
   results ={ 
-    cG: 0, // # total correct player guesses count  
+    cG: 1, // # total correct player guesses count  
     wG: 0,// # total incorrect player guesses count}
      }
 
@@ -59,12 +63,14 @@ function handleShuffle() {
   winner = null;
   splitWordGenerator = renderSplitWordGenerator()
   const wordDivs = document.querySelectorAll('.word-div')
-  // console.log('WORD:', wordDivs)
   wordDivs.forEach(div => div.remove())
   renderWordDiv()
+  const keyboardBtn = document.querySelectorAll('.keyboard-btn')
+  keyboardBtn.forEach(btn => btn.remove())
+  // button.style.backgroundColor = 'white';
+  // button.style.opacity= '1';
+  getKeyboard()
 
-     /// replace WordDiv
-     //resetKeyboard
   render();
 
 }
@@ -73,20 +79,13 @@ function handleShuffle() {
 function render() {
   renderResults()
   renderControls()
+  
 }
-
 
 
 function renderControls() {
   playAgainBtn.style.visibility = winner ? "visible" : "hidden";
-}
 
-
-function getWinner(button, letter) {
-
-  //need to check for a winner in the broard state
-  //returb null for no winner, retun YES from winner
-  
 }
 
 
@@ -123,7 +122,7 @@ function renderWordDiv() {
     ALPH_LOOKUP.forEach(letter => {
     for (let i=0; i<1; i++) {
       const button = document.createElement('button');
-      button.classList.add(letter)
+      button.classList.add(letter, 'keyboard-btn')
       button.innerText = letter
       makeKeyboard.appendChild(button);
       button.addEventListener('click', evt => handleClick(evt.target, letter))
@@ -135,13 +134,15 @@ function renderWordDiv() {
 
 
 function handleClick(button, letter) {
-  winner = getWinner(button, letter) //**************//
+  // winner = getWinner(button, letter) //**************//
   const word = splitWordGenerator; 
   if (splitWordGenerator.includes(letter)) {
+
    const letterEls= document.querySelectorAll(`#${letter}`)
    console.log(letterEls)
    letterEls.forEach((letterEl) => letterEl.textContent = letter)
     button.style.backgroundColor = 'green';
+    getWinner(button, letter)
     correctGuess()
 
   } else {
@@ -154,23 +155,66 @@ function handleClick(button, letter) {
 }
 
 
+
+
+
+// Set the src attribute to the path of the image in the other folder
+ // Update the path accordingly
+
+// Append the img element to the document's body or any specific element within the body
+; // Append to body
+
+
+function getWinner() {
+  const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;
+  if (correctGs === splitWordGenerator.length) {
+    winner = true;
+    console.log('Congratulations! You have won this round!');
+
+
+const mainEl = document.querySelector('main')
+const img = document.createElement('img');
+img.src = 'imgs/astronaut.png';
+mainEl.appendChild(img)
+
+
+mainEl.style.justifySelf = 'center'
+const mainSecEl = document.querySelectorAll('main')
+mainSecEl.forEach(div => div.remove())
+
+AUDIO.currentTime = 0 
+AUDIO.play();
+playAgainBtn.style.visibility = winner ? "visible" : "hidden";
+
+render()
+
+  } else {
+    winner = false;
+    console.log('Keep guessing!');
+  }
   
+  renderControls();
+}
+
+
+
 function correctGuess() {
-    results.cG++
-    button.disabled = true
-    render()
+  results.cG++
+  button.disabled = true
+  render()
 }
 
 function wrongGuess() {
   results.wG++;
   if (results.wG < guessLimit){
-    render()
+
   } else {
     console.log ("You've reached your guesslimit");
     wordDiv.style.backgroundColor= "black";
-    
-  } 
 
+    // gridContainer.style.backgroundColor= "red";
+  }    
+  render()
 }
 
 
@@ -182,3 +226,4 @@ function renderResults() {
 
   }
 }
+

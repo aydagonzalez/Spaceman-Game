@@ -3,14 +3,9 @@
     font-weight: 300;
     display: grid;
     grid-template-columns:250px 250px 250px 250px;
-    /* grid-row-gap: 10px;  */
-    /* grid-column-gap: 10px; */
-    /* grid-template-areas:  */
     justify-content: center;
     align-self: center;
-    /* align-content: center; */
-    /* justify-self: center; */
-    padding-top: 3%;
+    padding-top: 10%;
 
  }
 
@@ -210,3 +205,9 @@ button:hover {
    color: white;
    background-color: darkgrey;
 }
+/* 
+
+
+ div  {
+    background-color: pink;
+ } */
