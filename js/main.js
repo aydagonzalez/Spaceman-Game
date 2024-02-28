@@ -2,8 +2,8 @@
 
 const AUDIO = new Audio('imgs/win-sound.wav')
                                   /*----- constants -----*/
-const WORDS = ['wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
-const guessLimit = 3 
+const WORDS = ['astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
+const guessLimit = 1
 const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 ];
 
@@ -21,9 +21,13 @@ const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
 const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
 const makeKeyboard = document.querySelector(".middle-section")
-const button =document.createElement('button');
 const playAgainBtn = document.getElementById('play-again-button')
 const shuffleWordsBtn = document.getElementById('shuffle')
+const mainEl = document.querySelector('body')
+const button =document.createElement('button');
+button.classList.add('play-again-btn')
+button.innerText = 'PLAY AGAIN'
+
 // const gridContainer = document.querySelectorAll('div')
 
 
@@ -67,10 +71,10 @@ function handleShuffle() {
   renderWordDiv()
   const keyboardBtn = document.querySelectorAll('.keyboard-btn')
   keyboardBtn.forEach(btn => btn.remove())
+  // wordDiv.innerHTML.remove()
   // button.style.backgroundColor = 'white';
   // button.style.opacity= '1';
   getKeyboard()
-
   render();
 
 }
@@ -79,7 +83,6 @@ function handleShuffle() {
 function render() {
   renderResults()
   renderControls()
-  
 }
 
 
@@ -101,7 +104,6 @@ function renderSplitWordGenerator() {
   let shuffledWordArr = shuffledWord[0];
   let splitWord = shuffledWordArr.split(''); {
     return splitWord
-    // console.log('SPLITWORD w;', splitWord)
   };
 }
 
@@ -134,17 +136,14 @@ function renderWordDiv() {
 
 
 function handleClick(button, letter) {
-  // winner = getWinner(button, letter) //**************//
   const word = splitWordGenerator; 
   if (splitWordGenerator.includes(letter)) {
-
    const letterEls= document.querySelectorAll(`#${letter}`)
-   console.log(letterEls)
-   letterEls.forEach((letterEl) => letterEl.textContent = letter)
+    console.log(letterEls)
+    letterEls.forEach((letterEl) => letterEl.textContent = letter)
     button.style.backgroundColor = 'green';
     getWinner(button, letter)
     correctGuess()
-
   } else {
     button.disabled = true
     button.style.backgroundColor = 'grey';
@@ -156,15 +155,6 @@ function handleClick(button, letter) {
 
 
 
-
-
-// Set the src attribute to the path of the image in the other folder
- // Update the path accordingly
-
-// Append the img element to the document's body or any specific element within the body
-; // Append to body
-
-
 function getWinner() {
   const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;    ////find reference
   if (correctGs === splitWordGenerator.length) {
@@ -172,22 +162,22 @@ function getWinner() {
     console.log('Congratulations! You have won this round!');
 
 
-const mainEl = document.querySelector('body')
-const img = document.createElement('img');
-img.src = 'imgs/astronaut.png';
-img.classList.add('astro')
-mainEl.appendChild(img)
+  const img = document.createElement('img');
+  img.src = 'imgs/astronaut.png';
+  img.classList.add('astro')
+  mainEl.appendChild(img)
+
+  const mainSecEl = document.querySelectorAll('main')
+  mainSecEl.forEach(div => div.remove())
+
+  mainEl.appendChild(button);
+  button.addEventListener('click', handleShuffle)
 
 
-mainEl.style.justifySelf = 'center'
-const mainSecEl = document.querySelectorAll('main')
-mainSecEl.forEach(div => div.remove())
+  AUDIO.currentTime = 0 
+  AUDIO.play();
 
-AUDIO.currentTime = 0 
-AUDIO.play();
-playAgainBtn.style.visibility = winner ? "visible" : "hidden";
-
-render()
+  render()
 
   } else {
     winner = false;
@@ -207,11 +197,29 @@ function correctGuess() {
 
 function wrongGuess() {
   results.wG++;
-  if (results.wG < guessLimit){
-
+  if (results.wG <= guessLimit){
   } else {
     console.log ("You've reached your guesslimit");
-    wordDiv.style.backgroundColor= "black";
+    // const wordLimitReach = document.createElement(div)
+    wordDiv.innerHTML = `<h1>You have reached the limit for allowed guesses!</h1>`
+    // Now the aliens have take our spaceman! Hurry, save them!
+    const getPic1 = document.getElementById('pic5')
+    getPic1.style.visibility = "visible"
+
+    // for (let key in results) { 
+  //   const getPic = document.getElementById(`pic${results.wG}`)
+  //   getPic.style.visibility = "visible";
+
+    // if (results.wG = guessLimit) {
+    //   const getlightPic = document.getElementById('light')
+    //   getlightPic.style.visibility = winner ? "visible" : "hidden";
+      // const getPic5 = document.getElementById('pic5')
+      // getPic5.style.visibility = "visible"
+  //   }
+  
+  // }   
+
+
 
     // gridContainer.style.backgroundColor= "red";
   }    
@@ -223,8 +231,7 @@ function wrongGuess() {
 function renderResults() {
   for (let key in results) { 
     pGuessEl= document.getElementById(`wG-guess`);
-      pGuessEl.innerHTML = `${results.wG}` + ` out of ` + `${guessLimit}`;
-
+    pGuessEl.innerHTML = `${results.wG}` + ` out of ` + `${guessLimit}`;
   }
 }
 
