@@ -2,10 +2,12 @@
     font-family: "Press Start 2P", system-ui;
     font-weight: 300;
     display: grid;
-    grid-template-columns:250px 250px 250px 250px;
+    grid-template-columns: 250px 250px 250px;
     justify-content: center;
     align-self: center;
     padding-top: 10%;
+    font-size: 40px;
+
  }
 
  body {
@@ -25,7 +27,7 @@
 	text-align: center;
     padding-top: 20px;
     grid-column-start: 1;
-    grid-column-end: -1;
+    grid-column-end: 5;
     grid-row-start: 1;
     grid-row-end: 2;
     z-index: 1;
@@ -35,6 +37,9 @@
 .left-section {
     grid-column: 1/2 ;
     min-height: 550px;
+    max-width: 100%;
+    height: auto;
+    border-style: ;
 }
 
 #aircraft {
@@ -66,7 +71,7 @@
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 3;
-    z-index: 1;
+    z-index: 7;
     text-align: center;
 }
 
@@ -236,3 +241,4 @@ button:hover {
     justify-items: center;
 }
  
+

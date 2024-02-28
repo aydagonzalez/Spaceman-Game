@@ -2,8 +2,8 @@
 
 const AUDIO = new Audio('imgs/win-sound.wav')
                                   /*----- constants -----*/
-const WORDS = ['astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'hypodermic', 'software', 'engineer', 'homework'] 
-const guessLimit = 1
+const WORDS = ['sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star'] 
+const guessLimit = 5
 const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 ];
 
@@ -21,7 +21,7 @@ const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
 const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
 const makeKeyboard = document.querySelector(".middle-section")
-const playAgainBtn = document.getElementById('play-again-button')
+// const playAgainBtn = document.getElementById('play-again-btn')
 const shuffleWordsBtn = document.getElementById('shuffle')
 const mainEl = document.querySelector('body')
 const button =document.createElement('button');
@@ -36,7 +36,7 @@ button.innerText = 'PLAY AGAIN'
 
 
                                   /*----- event listeners -----*/
-playAgainBtn.addEventListener('click', handleShuffle)
+// playAgainBtn.addEventListener('click', handleShuffle)
 shuffleWordsBtn.addEventListener('click', handleShuffle)
 
                                  /*----- functions -----*/
@@ -44,7 +44,7 @@ shuffleWordsBtn.addEventListener('click', handleShuffle)
 init();
 function init() {
   results ={ 
-    cG: 1, // # total correct player guesses count  
+    cG: 0, // # total correct player guesses count  
     wG: 0,// # total incorrect player guesses count}
      }
 
@@ -56,6 +56,7 @@ function init() {
 }
 
 function handlePlayAgain() {
+  handleShuffle()
   render()
 }
 
@@ -69,14 +70,18 @@ function handleShuffle() {
   const wordDivs = document.querySelectorAll('.word-div')
   wordDivs.forEach(div => div.remove())
   renderWordDiv()
+
   const keyboardBtn = document.querySelectorAll('.keyboard-btn')
   keyboardBtn.forEach(btn => btn.remove())
-  // wordDiv.innerHTML.remove()
-  // button.style.backgroundColor = 'white';
-  // button.style.opacity= '1';
+  
   getKeyboard()
-  render();
 
+  const h1LimiReached = document.getElementById('word-limit')
+  h1LimiReached.remove()
+
+
+  // getKeyboard()
+  render();
 }
 
 
@@ -87,7 +92,7 @@ function render() {
 
 
 function renderControls() {
-  playAgainBtn.style.visibility = winner ? "visible" : "hidden";
+  // playAgainBtn.style.visibility = winner ? "visible" : "hidden";
 
 }
 
@@ -176,7 +181,6 @@ function getWinner() {
 
   AUDIO.currentTime = 0 
   AUDIO.play();
-
   render()
 
   } else {
@@ -184,7 +188,7 @@ function getWinner() {
     console.log('Keep guessing!');
   }
   
-  renderControls();
+  // renderControls();
 }
 
 
@@ -197,31 +201,19 @@ function correctGuess() {
 
 function wrongGuess() {
   results.wG++;
-  if (results.wG <= guessLimit){
+  if (results.wG < guessLimit){
+
   } else {
     console.log ("You've reached your guesslimit");
     // const wordLimitReach = document.createElement(div)
-    wordDiv.innerHTML = `<h1>You have reached the limit for allowed guesses!</h1>`
+    wordDiv.innerHTML = `<h1 id="word-limit">You have reached the limit for allowed guesses!</h1>`
     // Now the aliens have take our spaceman! Hurry, save them!
     const getPic1 = document.getElementById('pic5')
     getPic1.style.visibility = "visible"
 
-    // for (let key in results) { 
-  //   const getPic = document.getElementById(`pic${results.wG}`)
-  //   getPic.style.visibility = "visible";
-
-    // if (results.wG = guessLimit) {
-    //   const getlightPic = document.getElementById('light')
-    //   getlightPic.style.visibility = winner ? "visible" : "hidden";
-      // const getPic5 = document.getElementById('pic5')
-      // getPic5.style.visibility = "visible"
-  //   }
-  
-  // }   
 
 
 
-    // gridContainer.style.backgroundColor= "red";
   }    
   render()
 }
