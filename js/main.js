@@ -9,7 +9,6 @@ const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o'
 ];
 
 
-
                                   /*----- state variables -----*/
 let results;
 let winner; 
@@ -18,17 +17,25 @@ let splitWordGenerator;
                                   /*----- cached elements  -----*/
 
 const wordDiv = document.querySelector(".flex-container");
+const makeKeyboard = document.querySelector(".middle-section")
+const shuffleWordsBtn = document.getElementById('shuffle')
+const mainEl = document.querySelector('.flex-container')
+const button =document.createElement('button');
+const img = document.createElement('img');
+
 const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
-const columnEl = document.querySelector('.flex-container'); // Assuming there's only one column element
-const makeKeyboard = document.querySelector(".middle-section")
+const columnEl = document.querySelector('.flex-container');
+const playAgainBtn = document.querySelector('.play-again-btn')
+const pGuessEl= document.getElementById(`wG-guess`)
+
 // const playAgainBtn = document.getElementById('play-again-btn')
-const shuffleWordsBtn = document.getElementById('shuffle')
-const mainEl = document.querySelector('body')
-const button =document.createElement('button');
+
+
+
 // button.classList.add('play-again-btn')
 // button.innerText = 'PLAY AGAIN'
-const img = document.createElement('img');
+
 
 // const gridContainer = document.querySelectorAll('div')
 
@@ -38,41 +45,48 @@ const img = document.createElement('img');
 
 
                                   /*----- event listeners -----*/
-button.classList.add('play-again-btn')
-button.innerText = 'PLAY AGAIN???'
-const playAgainBtn = document.querySelector('.play-again-btn')
+
+
 playAgainBtn.addEventListener('click', handlePlayAgain)
-playAgainBtn.style.visibility = 'hidden'
+// playAgainBtn.style.visibility = 'hidden'
 shuffleWordsBtn.addEventListener('click', handleShuffle)
 
                                  /*----- functions -----*/
                                 
 init();
+
 function init() {
   results ={ 
-    cG: 0, // # total correct player guesses count  
-    wG: 0,// # total incorrect player guesses count}
-     }
+    cG: 0,
+    wG: 0,
+  }
 
   winner = null;
   splitWordGenerator = renderSplitWordGenerator()
+  playAgainBtn.style.visibility = 'hidden'
   getKeyboard();
   renderWordDiv();
   render()
 }
 
 function handlePlayAgain() {
-init()
-  render()
+  handleShuffle()
+  mainEl.querySelector('.astro').remove()
+  playAgainBtn.style.visibility = 'hidden'
+  shuffleWordsBtn.style.visibility = "visible"
+
+
+  
 }
 
 function handleShuffle() {
   results ={ 
-    cG: 0, // # total correct player guesses count  
-    wG: 0,// # total incorrect player guesses count}
-     }
+    cG: 0,
+    wG: 0,
+  }
   winner = null;
   splitWordGenerator = renderSplitWordGenerator()
+  
   const wordDivs = document.querySelectorAll('.word-div')
   wordDivs.forEach(div => div.remove())
   renderWordDiv()
@@ -85,11 +99,11 @@ function handleShuffle() {
   const disableAst = document.querySelectorAll('.astronaut')
   disableAst.forEach(ast => ast.remove())
 
-  const h1LimiReached = document.getElementById('letter-limit')
-  if (h1LimiReached) {
-  console.log(h1LimiReached)
-  h1LimiReached.remove()
+  const h1LimitReached = document.getElementById('letter-limit')
+  if (h1LimitReached) {
+  h1LimitReached.remove()
   }
+
 
   // getKeyboard()
   render();
@@ -170,30 +184,34 @@ function handleClick(button, letter) {
 }
 
 
-
 function getWinner() {
-  const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;    ////find reference
+  const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;    //find reference
   if (correctGs === splitWordGenerator.length) {
     winner = true;
     console.log('Congratulations! You have won this round!');
+
     playAgainBtn.style.visibility = 'visible'
+    
 
-
-
-  img.src = 'imgs/astronaut.png';
-  img.classList.add('astro')
-  mainEl.appendChild(img)
-  // playAgainBtn.style.visibility = 'visible'
+    img.src = 'imgs/astronaut.png';
+    img.classList.add('astro')
+    mainEl.appendChild(img)
 
   const mainSecEl = document.querySelectorAll('main')
-  mainSecEl.forEach(div => div.remove())
+  // mainSecEl.forEach(div => div.style.backgroundColor = "grey")
 
   mainEl.appendChild(button);
   button.addEventListener('click', handleShuffle)
+  const keyboardBtn = document.querySelectorAll('.keyboard-btn')
+  keyboardBtn.forEach(btn => {
+    btn.style.visibility = "hidden";
+  });
+  
+  shuffleWordsBtn.style.visibility = "hidden"
 
 
   AUDIO.currentTime = 0 
-  AUDIO.play();
+  // AUDIO.play();
   render()
 
   } else {
@@ -214,42 +232,26 @@ function correctGuess() {
 
 function wrongGuess() {
   results.wG++;
-
   for (let key in results) { 
     const getPic = document.getElementById(`pic${results.wG}`)
-    getPic.style.visibility = results.wG ? "visible" : "hidden";
+    // getPic.style.visibility = results.wG ? "visible" : "hidden";
 
   if (results.wG < guessLimit){
-
-  } else {
-    console.log ("You've reached your guesslimit");
-    // const wordLimitReach = document.createElement(div)
-    wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for allowed guesses!</h1>`
-    // const getPic1 = document.getElementById('pic5')
-    // getPic1.style.visibility = "visible"
-
- 
-
-    // if (results.wG = guessLimit) {
-    //   const getlightPic = document.getElementById('light')
-    //   getlightPic.style.visibility = winner ? "visible" : "hidden";
-    //   const getPic5 = document.getElementById('pic5')
-    //   getPic5.style.visibility = "visible"
-    // }
-
-  }  
-
-
-
+    } else {
+      console.log ("You've reached your guesslimit");
+      wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for allowed guesses!</h1>`
+      const keyboardBtn = document.querySelectorAll('.keyboard-btn')
+      keyboardBtn.forEach(btn => btn.remove())
+      
+    }  
   }    
   render()
 }
 
 
-
 function renderResults() {
   for (let key in results) { 
-    pGuessEl= document.getElementById(`wG-guess`);
+
     pGuessEl.innerHTML = `${results.wG}` + ` out of ` + `${guessLimit}`;
   }
 }
