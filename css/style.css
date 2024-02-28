@@ -6,8 +6,8 @@
     justify-content: center;
     align-self: center;
     padding-top: 10%;
-    font-size: 40px;
-
+    font-size: 20px;
+    
  }
 
  body {
@@ -213,12 +213,13 @@ button:hover {
  }
 
  #pic4 {
-    max-width: 50%; 
-    max-height: 50%;
+
+    height: 50px;
     position: absolute;
     z-index: 5;
     object-position: -150px; 
     visibility: hidden;
+    position: fixed
  }
 
 
@@ -227,9 +228,10 @@ button:hover {
     max-height: 50%;
     position: absolute;
     z-index: 6;
-    object-position: -129px; 
+    object-position: -100px; 
     visibility: hidden;
-    padding-top: 11px;
+    padding-top: 19px;
+    
  }
 
  .play-again-btn {

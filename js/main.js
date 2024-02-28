@@ -2,7 +2,8 @@
 
 const AUDIO = new Audio('imgs/win-sound.wav')
                                   /*----- constants -----*/
-const WORDS = ['sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star'] 
+const WORDS = ['s',]
+const TEY =[ 'sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star'] 
 const guessLimit = 5
 const ALPH_LOOKUP = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
 ];
@@ -25,8 +26,9 @@ const makeKeyboard = document.querySelector(".middle-section")
 const shuffleWordsBtn = document.getElementById('shuffle')
 const mainEl = document.querySelector('body')
 const button =document.createElement('button');
-button.classList.add('play-again-btn')
-button.innerText = 'PLAY AGAIN'
+// button.classList.add('play-again-btn')
+// button.innerText = 'PLAY AGAIN'
+const img = document.createElement('img');
 
 // const gridContainer = document.querySelectorAll('div')
 
@@ -36,7 +38,11 @@ button.innerText = 'PLAY AGAIN'
 
 
                                   /*----- event listeners -----*/
-// playAgainBtn.addEventListener('click', handleShuffle)
+button.classList.add('play-again-btn')
+button.innerText = 'PLAY AGAIN???'
+const playAgainBtn = document.querySelector('.play-again-btn')
+playAgainBtn.addEventListener('click', handlePlayAgain)
+playAgainBtn.style.visibility = 'hidden'
 shuffleWordsBtn.addEventListener('click', handleShuffle)
 
                                  /*----- functions -----*/
@@ -56,7 +62,7 @@ function init() {
 }
 
 function handlePlayAgain() {
-  handleShuffle()
+init()
   render()
 }
 
@@ -76,9 +82,14 @@ function handleShuffle() {
   
   getKeyboard()
 
-  const h1LimiReached = document.getElementById('word-limit')
-  h1LimiReached.remove()
+  const disableAst = document.querySelectorAll('.astronaut')
+  disableAst.forEach(ast => ast.remove())
 
+  const h1LimiReached = document.getElementById('letter-limit')
+  if (h1LimiReached) {
+  console.log(h1LimiReached)
+  h1LimiReached.remove()
+  }
 
   // getKeyboard()
   render();
@@ -165,12 +176,14 @@ function getWinner() {
   if (correctGs === splitWordGenerator.length) {
     winner = true;
     console.log('Congratulations! You have won this round!');
+    playAgainBtn.style.visibility = 'visible'
 
 
-  const img = document.createElement('img');
+
   img.src = 'imgs/astronaut.png';
   img.classList.add('astro')
   mainEl.appendChild(img)
+  // playAgainBtn.style.visibility = 'visible'
 
   const mainSecEl = document.querySelectorAll('main')
   mainSecEl.forEach(div => div.remove())
@@ -201,16 +214,30 @@ function correctGuess() {
 
 function wrongGuess() {
   results.wG++;
+
+  for (let key in results) { 
+    const getPic = document.getElementById(`pic${results.wG}`)
+    getPic.style.visibility = results.wG ? "visible" : "hidden";
+
   if (results.wG < guessLimit){
 
   } else {
     console.log ("You've reached your guesslimit");
     // const wordLimitReach = document.createElement(div)
-    wordDiv.innerHTML = `<h1 id="word-limit">You have reached the limit for allowed guesses!</h1>`
-    // Now the aliens have take our spaceman! Hurry, save them!
-    const getPic1 = document.getElementById('pic5')
-    getPic1.style.visibility = "visible"
+    wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for allowed guesses!</h1>`
+    // const getPic1 = document.getElementById('pic5')
+    // getPic1.style.visibility = "visible"
 
+ 
+
+    // if (results.wG = guessLimit) {
+    //   const getlightPic = document.getElementById('light')
+    //   getlightPic.style.visibility = winner ? "visible" : "hidden";
+    //   const getPic5 = document.getElementById('pic5')
+    //   getPic5.style.visibility = "visible"
+    // }
+
+  }  
 
 
 
