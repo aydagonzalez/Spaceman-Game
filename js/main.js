@@ -220,12 +220,12 @@ function wrongGuess() {
   results.wG++;
   for (let key in results) {
     const getPic = document.getElementById(`pic${results.wG}`)
-    // getPic.style.visibility = results.wG ? "visible" : "hidden";
 
     if (results.wG < guessLimit) {
     } else {
       console.log("You've reached your guesslimit");
-      wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for allowed guesses!</h1>`
+      wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
+      <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
       const keyboardBtn = document.querySelectorAll('.keyboard-btn')
       keyboardBtn.forEach(btn => btn.remove())
 
