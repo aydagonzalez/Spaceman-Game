@@ -5,7 +5,7 @@ const correctG = new Audio('imgs/correct-answer.wav')
 const wrongG = new Audio('imgs/wrong-answer.wav')
 const shuffleAudio = new Audio('imgs/retro-game-over.wav')
 /*----- constants -----*/
-const WORDS = ['sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
+const WORDS = ['sun', 'planet', 'mercury', 'saturn', 'stardust', 'plasma', 'atoms', 'earth', 'universe', 'neutron', 'alien', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'world', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
 const guessLimit = 7
 const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
