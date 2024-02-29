@@ -7,10 +7,12 @@
     align-self: center;
     padding-top: 10%;
     font-size: 20px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
 }
 
 body {
-    background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTM2NjcxMC1pbWFnZS1rd3Z4eGVxcC5qcGc.jpg");
+    background-image: url("https://i.pinimg.com/originals/1a/a2/00/1aa2008c04d15f46d38b797cb1452ed4.gif");
     opacity: 0.8;
     background-size: cover;
 }
@@ -117,7 +119,6 @@ body {
     padding-left: 15px;
 }
 
-
 .item-6 {
     background-color: #dfdfdf;
     display: flex;
@@ -152,7 +153,7 @@ button {
 
 button:hover {
     color: white;
-    background-color: darkgrey;
+    background-color: purple;
 }
 
 .astro {

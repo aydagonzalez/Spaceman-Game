@@ -3,6 +3,7 @@
 const AUDIO = new Audio('imgs/win-sound.wav')
 const correctG = new Audio('imgs/correct-answer.wav')
 const wrongG = new Audio('imgs/wrong-answer.wav')
+const shuffleAudio = new Audio('imgs/retro-game-over.wav')
 /*----- constants -----*/
 const WORDS = ['sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
 const guessLimit = 7
@@ -13,16 +14,14 @@ const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 let results;
 let winner;
 let splitWordGenerator;
-
 /*----- cached elements  -----*/
 
 const wordDiv = document.querySelector(".flex-container");
 const makeKeyboard = document.querySelector(".middle-section")
 const shuffleWordsBtn = document.getElementById('shuffle')
 const mainEl = document.querySelector('.flex-container')
-const button = document.createElement('button');
+// const button = document.createElement('button');
 const img = document.createElement('img');
-
 const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
 const columnEl = document.querySelector('.flex-container');
@@ -32,14 +31,10 @@ const getAstroPic = document.querySelectorAll(".astronaut")
 
 
 /*----- event listeners -----*/
-
-
 playAgainBtn.addEventListener('click', handlePlayAgain)
-
 shuffleWordsBtn.addEventListener('click', handleShuffle)
 
 /*----- functions -----*/
-
 init();
 
 function init() {
@@ -47,7 +42,6 @@ function init() {
     cG: 0,
     wG: 0,
   }
-
   winner = null;
   splitWordGenerator = renderSplitWordGenerator()
   playAgainBtn.style.visibility = 'hidden'
@@ -75,6 +69,10 @@ function handleShuffle() {
   }
   winner = null;
   splitWordGenerator = renderSplitWordGenerator()
+
+  shuffleAudio.currentTime = 0
+  shuffleAudio.play();
+  document.querySelector('#shuffle').style.backgroundColor = 'white'
 
   const wordDivs = document.querySelectorAll('.word-div')
   wordDivs.forEach(div => div.remove())
@@ -173,8 +171,6 @@ function getWinner() {
     mainEl.appendChild(img)
 
     const mainSecEl = document.querySelectorAll('main')
-    mainEl.appendChild(button);
-    button.addEventListener('click', handleShuffle)
     const keyboardBtn = document.querySelectorAll('.keyboard-btn')
     keyboardBtn.forEach(btn => {
       btn.style.visibility = "hidden";
@@ -196,12 +192,14 @@ function correctGuess() {
   results.cG++
   correctG.currentTime = 0
   correctG.play();
-  button.disabled = true
+  // button.disabled = true
   render()
 }
 
 function wrongGuess() {
   results.wG++;
+  wrongG.currentTime = 0
+  wrongG.play();
   for (let key in results) {
     const getPic = document.getElementById(`pic${results.wG}`)
     getPic.style.visibility = "visible";
@@ -211,6 +209,7 @@ function wrongGuess() {
       console.log("You've reached your guesslimit");
       wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
       <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
+      document.querySelector('#shuffle').style.backgroundColor = 'red'
     }
   }
   render()
