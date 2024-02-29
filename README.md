@@ -2,7 +2,7 @@
 
 The "Spaceman" game is a word-guessing game, where the player tries to figure out a secret word within a certain number of attempts. Here's how the game works:
 
-The game has generated a secret word for you to guess. You have a limited amount of guesses, in this particular game you will have five available guesses.
+The game has generated a secret word for you to guess. You have a limited amount of guesses, in this particular game you will have seven available guesses.
 
 The player begins making a guess by clicing the letter on the keyboard.
 Correctly guessed letters will be revealed in their correct positions in the secret word, while incorrect guesses are marked as incorrect and the buttons on the keyboard are disabled.
