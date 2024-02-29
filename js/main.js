@@ -5,10 +5,12 @@ const correctG = new Audio('imgs/correct-answer.wav')
 const wrongG = new Audio('imgs/wrong-answer.wav')
 /*----- constants -----*/
 const WORDS = ['sun', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'engineer', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
-const guessLimit = 5
+const guessLimit = 7
 const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
+// const getAstroPic = document.getElementById(`pic5`)
+// getAstroPic.style.visibility = "visible";
 
 /*----- state variables -----*/
 let results;
@@ -29,6 +31,7 @@ const columnEls = [document.querySelectorAll('.column')]
 const columnEl = document.querySelector('.flex-container');
 const playAgainBtn = document.querySelector('.play-again-btn')
 const pGuessEl = document.getElementById(`wG-guess`)
+const getAstroPic = document.querySelectorAll(".astronaut")
 
 
 /*----- event listeners -----*/
@@ -61,6 +64,12 @@ function handlePlayAgain() {
   mainEl.querySelector('.astro').remove()
   playAgainBtn.style.visibility = 'hidden'
   shuffleWordsBtn.style.visibility = "visible"
+
+  // const getAstroPic = document.getElementById(`pic${results.wG}`)
+  if(getAstroPic) {
+    getAstroPic.forEach(ast => ast.style.visibility = "hidden")
+  }
+
 }
 
 function handleShuffle() {
@@ -80,12 +89,11 @@ function handleShuffle() {
 
   getKeyboard()
 
-  const disableAst = document.querySelectorAll('.astronaut')
-  disableAst.forEach(ast => ast.remove())
+  getAstroPic.forEach(ast => ast.style.visibility = "hidden")
 
   const h1LimitReached = document.getElementById('letter-limit')
   if (h1LimitReached) {
-    h1LimitReached.remove()
+    h1LimitReached.style.display = 'none'
   }
   render();
 }
@@ -209,14 +217,17 @@ function wrongGuess() {
   results.wG++;
   for (let key in results) {
     const getPic = document.getElementById(`pic${results.wG}`)
+    getPic.style.visibility = "visible";
+    
+
 
     if (results.wG < guessLimit) {
     } else {
       console.log("You've reached your guesslimit");
       wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
       <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
-      const keyboardBtn = document.querySelectorAll('.keyboard-btn')
-      keyboardBtn.forEach(btn => btn.remove())
+      // const keyboardBtn = document.querySelectorAll('.keyboard-btn')
+      // keyboardBtn.forEach(btn => btn.remove())
 
     }
   }
