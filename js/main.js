@@ -14,7 +14,7 @@ const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 let results;
 let winner;
 let splitWordGenerator;
-// let word = splitWordGenerator; 
+
 /*----- cached elements  -----*/
 
 const wordDiv = document.querySelector(".flex-container");
@@ -61,9 +61,6 @@ function handlePlayAgain() {
   mainEl.querySelector('.astro').remove()
   playAgainBtn.style.visibility = 'hidden'
   shuffleWordsBtn.style.visibility = "visible"
-
-
-
 }
 
 function handleShuffle() {
@@ -90,23 +87,15 @@ function handleShuffle() {
   if (h1LimitReached) {
     h1LimitReached.remove()
   }
-
-
-  // getKeyboard()
   render();
 }
 
 
 function render() {
   renderResults()
-  renderControls()
 }
 
 
-function renderControls() {
-  // playAgainBtn.style.visibility = winner ? "visible" : "hidden";
-
-}
 
 
 // GOOD TO GO //
@@ -237,7 +226,6 @@ function wrongGuess() {
 
 function renderResults() {
   for (let key in results) {
-
     pGuessEl.innerHTML = `${results.wG}` + ` out of ` + `${guessLimit}`;
   }
 }
