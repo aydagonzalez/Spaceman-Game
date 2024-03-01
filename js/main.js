@@ -136,8 +136,6 @@ function getKeyboard() {
   )
 }
 
-
-
 function handleClick(button, letter) {
   const word = splitWordGenerator;
   if (splitWordGenerator.includes(letter)) {
