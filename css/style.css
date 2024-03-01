@@ -5,7 +5,7 @@
     grid-template-columns: 250px 250px 250px;
     justify-content: center;
     align-self: center;
-    padding-top: 10%;
+    padding-top: 4%;
     font-size: 20px;
 }
 
@@ -156,9 +156,9 @@ button:hover {
 
 .astro {
     text-align: center;
-    text-justify: center;
+    /* text-justify: center; */
     margin-top: 20%;
-    position: fixed;
+    position: absolute;
     z-index: 9;
 }
 
@@ -232,11 +232,11 @@ button:hover {
 
 #pic7 {
     z-index: 1;
-    max-width: 20%;
+    max-width: 100%;
     position: absolute;
-    object-position: -4em;
+    /* object-position: 2em; */
     visibility: hidden;
-    padding-top: 0em;
+    padding-top: -11em;
 }
 
 
@@ -247,5 +247,4 @@ button:hover {
     padding: 20px;
     margin-left: 25%;
     margin-top: 2%;
-
 }
