@@ -5,7 +5,7 @@ const correctG = new Audio('imgs/correct-answer.wav')
 const wrongG = new Audio('imgs/wrong-answer.wav')
 const shuffleAudio = new Audio('imgs/retro-game-over.wav')
 /*----- constants -----*/
-const WORDS = ['sun', 'planet', 'mercury', 'saturn', 'stardust', 'plasma', 'atoms', 'earth', 'universe', 'neutron', 'alien', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'world', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
+const WORDS = ['sun', 'planet', 'mercury', 'saturn', 'stardust', 'plasma', 'atoms', 'earth', 'universe', 'neutron', 'alien', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'world', 'eclipse', 'cosmic', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
 const guessLimit = 7
 const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
@@ -59,7 +59,6 @@ function handlePlayAgain() {
   if(getAstroPic) {
     getAstroPic.forEach(ast => ast.style.visibility = "hidden")
   }
-
 }
 
 function handleShuffle() {
@@ -122,8 +121,6 @@ function renderWordDiv() {
   }
 }
 
-
-// fronm geeks to geeks
 function getKeyboard() {
   ALPH_LOOKUP.forEach(letter => {
     for (let i = 0; i < 1; i++) {
@@ -133,8 +130,7 @@ function getKeyboard() {
       makeKeyboard.appendChild(button);
       button.addEventListener('click', evt => handleClick(evt.target, letter))
     }
-  }
-  )
+  })
 }
 
 
@@ -163,7 +159,6 @@ function getWinner() {
   if (correctGs === splitWordGenerator.length) {
     winner = true;
     console.log('Congratulations! You have won this round!');
-
     playAgainBtn.style.visibility = 'visible'
 
     img.src = 'imgs/astronaut.png';
@@ -177,11 +172,9 @@ function getWinner() {
     });
 
     shuffleWordsBtn.style.visibility = "hidden"
-
     AUDIO.currentTime = 0
     AUDIO.play();
     render()
-
   } else {
     winner = false;
     console.log('Keep guessing!');
