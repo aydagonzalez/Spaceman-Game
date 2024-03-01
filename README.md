@@ -12,10 +12,10 @@ The player can try various strategies to deduce the secret word, such as identif
 
 Good luck and enjoy the game!
 
-# Screenshot
+# Screenshots
 
-<img src="imgs/screenshot-guess-letter.png">
 <img src="imgs/screenshot-incorrect.png">
+<img src="imgs/screenshot-guess-letter.png">
 <img src="imgs/screenshot-win.png">
 
 # Technologies Used
