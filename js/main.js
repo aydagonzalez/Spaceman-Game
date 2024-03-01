@@ -20,7 +20,6 @@ const wordDiv = document.querySelector(".flex-container");
 const makeKeyboard = document.querySelector(".middle-section")
 const shuffleWordsBtn = document.getElementById('shuffle')
 const mainEl = document.querySelector('.flex-container')
-// const button = document.createElement('button');
 const img = document.createElement('img');
 const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
@@ -59,6 +58,7 @@ function handlePlayAgain() {
   if(getAstroPic) {
     getAstroPic.forEach(ast => ast.style.visibility = "hidden")
   }
+
 }
 
 function handleShuffle() {
@@ -71,7 +71,7 @@ function handleShuffle() {
 
   shuffleAudio.currentTime = 0
   shuffleAudio.play();
-  document.querySelector('#shuffle').style.backgroundColor = 'white'
+  document.querySelector('#shuffle').style.backgroundColor = ""
 
   const wordDivs = document.querySelectorAll('.word-div')
   wordDivs.forEach(div => div.remove())
@@ -121,6 +121,8 @@ function renderWordDiv() {
   }
 }
 
+
+// fronm geeks to geeks
 function getKeyboard() {
   ALPH_LOOKUP.forEach(letter => {
     for (let i = 0; i < 1; i++) {
@@ -130,10 +132,9 @@ function getKeyboard() {
       makeKeyboard.appendChild(button);
       button.addEventListener('click', evt => handleClick(evt.target, letter))
     }
-  })
+  }
+  )
 }
-
-
 
 function handleClick(button, letter) {
   const word = splitWordGenerator;
@@ -159,6 +160,7 @@ function getWinner() {
   if (correctGs === splitWordGenerator.length) {
     winner = true;
     console.log('Congratulations! You have won this round!');
+
     playAgainBtn.style.visibility = 'visible'
 
     img.src = 'imgs/astronaut.png';
@@ -172,9 +174,11 @@ function getWinner() {
     });
 
     shuffleWordsBtn.style.visibility = "hidden"
+
     AUDIO.currentTime = 0
     AUDIO.play();
     render()
+
   } else {
     winner = false;
     console.log('Keep guessing!');
@@ -202,7 +206,7 @@ function wrongGuess() {
       console.log("You've reached your guesslimit");
       wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
       <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
-      document.querySelector('#shuffle').style.backgroundColor = 'red'
+      document.querySelector('#shuffle').style.backgroundColor = '#DA70D6'
     }
   }
   render()
