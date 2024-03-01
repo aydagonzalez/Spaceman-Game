@@ -31,4 +31,6 @@ Good luck and enjoy the game!
 
 # Next Steps
 
-- Future enhancement is to make the spaceman part appear are the player incorrectly guesses the letter
+- Future enhancement 1 is to make the keyboard of correctly answered letters be disabled
+- Future enhancement 2 is to make a start menu explaining the game and telling them the them of the words
+
