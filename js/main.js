@@ -117,7 +117,6 @@ function renderWordDiv() {
     creatingWordDiv.classList.add('word-div', 'flex-item', 'item-1'); // Add a meaningful class name here
     creatingWordDiv.setAttribute('id', item);
     columnEl.appendChild(creatingWordDiv);
-    console.log(item);
   }
 }
 
@@ -140,7 +139,6 @@ function handleClick(button, letter) {
   const word = splitWordGenerator;
   if (splitWordGenerator.includes(letter)) {
     const letterEls = document.querySelectorAll(`#${letter}`)
-    console.log(letterEls)
     letterEls.forEach((letterEl) => letterEl.textContent = letter)
     button.style.backgroundColor = 'green';
     getWinner(button, letter)
@@ -150,7 +148,6 @@ function handleClick(button, letter) {
     button.style.backgroundColor = 'grey';
     button.style.opacity = '0.7';
     wrongGuess()
-    console.log('NO');
   }
 }
 
@@ -159,8 +156,6 @@ function getWinner() {
   const correctGs = document.querySelectorAll('.word-div:not(:empty)').length;    //find reference
   if (correctGs === splitWordGenerator.length) {
     winner = true;
-    console.log('Congratulations! You have won this round!');
-
     playAgainBtn.style.visibility = 'visible'
 
     img.src = 'imgs/astronaut.png';
@@ -181,7 +176,6 @@ function getWinner() {
 
   } else {
     winner = false;
-    console.log('Keep guessing!');
   }
 }
 
@@ -203,7 +197,6 @@ function wrongGuess() {
     
     if (results.wG < guessLimit) {
     } else {
-      console.log("You've reached your guesslimit");
       wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
       <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
       document.querySelector('#shuffle').style.backgroundColor = '#DA70D6'
