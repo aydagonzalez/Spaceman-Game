@@ -5,7 +5,7 @@ const correctG = new Audio('imgs/correct-answer.wav')
 const wrongG = new Audio('imgs/wrong-answer.wav')
 const shuffleAudio = new Audio('imgs/retro-game-over.wav')
 /*----- constants -----*/
-const WORDS = ['sun', 'planet', 'mercury', 'saturn', 'stardust', 'plasma', 'atoms', 'earth', 'universe', 'neutron', 'alien', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'world', 'eclipse', 'cosmic', 'constillation', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
+const WORDS = ['sun', 'planet', 'mercury', 'saturn', 'stardust', 'plasma', 'atoms', 'earth', 'universe', 'neutron', 'alien', 'astronaut', 'space', 'universe', 'jupiter', 'wavelength', 'science', 'gravity', 'world', 'eclipse', 'cosmic', 'asteroid', 'constellation', 'atmosphere', 'galaxy', 'star']
 const guessLimit = 7
 const ALPH_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
@@ -20,7 +20,6 @@ const wordDiv = document.querySelector(".flex-container");
 const makeKeyboard = document.querySelector(".middle-section")
 const shuffleWordsBtn = document.getElementById('shuffle')
 const mainEl = document.querySelector('.flex-container')
-// const button = document.createElement('button');
 const img = document.createElement('img');
 const creatingWordDiv = document.createElement('div');
 const columnEls = [document.querySelectorAll('.column')]
@@ -72,7 +71,7 @@ function handleShuffle() {
 
   shuffleAudio.currentTime = 0
   shuffleAudio.play();
-  document.querySelector('#shuffle').style.backgroundColor = 'white'
+  document.querySelector('#shuffle').style.backgroundColor = ""
 
   const wordDivs = document.querySelectorAll('.word-div')
   wordDivs.forEach(div => div.remove())
@@ -209,7 +208,7 @@ function wrongGuess() {
       console.log("You've reached your guesslimit");
       wordDiv.innerHTML = `<h1 id="letter-limit">You have reached </br> the limit for guesses </br>allowed!
       <br><br> The word was    <br> <span style="color:purple"> ${splitWordGenerator.join("")}.</span>  </h1>`
-      document.querySelector('#shuffle').style.backgroundColor = 'red'
+      document.querySelector('#shuffle').style.backgroundColor = '#DA70D6'
     }
   }
   render()
