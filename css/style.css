@@ -28,6 +28,12 @@ body {
     grid-row-end: 2;
     z-index: 1;
     background-color: #dfdfdf;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+    border-top-style: inset;
+    
+
+
 }
 
 .left-section {
@@ -91,6 +97,7 @@ body {
     min-height: 200px;
     text-align: center;
     padding-top: 6%;
+    border-bottom-right-radius: 80px;
 }
 
 
@@ -124,9 +131,12 @@ body {
     font-size: 10px;
 }
 
-.left-section,
+.left-section {
+    background-color: #dfdfdf;
+}
 .timer {
     background-color: #dfdfdf;
+    border-bottom-left-radius: 80px;
 }
 
 #shuffle #play-again-button {
